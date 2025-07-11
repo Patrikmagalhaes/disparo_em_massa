@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-interface DadoDaPlanilha {
+export interface DadoDaPlanilha {
   [key: string]: string | number;
 }
 
-interface VariableMessageEditorProps {
+export interface VariableMessageEditorProps {
   jsonData: DadoDaPlanilha[];
 }
 

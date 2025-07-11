@@ -1,9 +1,12 @@
 import React from "react";
 import * as XLSX from "xlsx";
+import type { DadoDaPlanilha } from "./VariableMessageEditor"; // 👈 importa o tipo
 
-function FileInput() {
-  const [data, setData] = React.useState<unknown[] | null>(null);
+interface Props {
+  onDataLoaded: (data: DadoDaPlanilha[]) => void;
+}
 
+function FileInput({ onDataLoaded }: Props) {
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -15,27 +18,17 @@ function FileInput() {
       if (!result || !(result instanceof ArrayBuffer)) return;
 
       const workbook = XLSX.read(result, { type: "array" });
-      const sheetName = workbook.SheetNames[0];
-      const sheet = workbook.Sheets[sheetName];
-      const sheetData = XLSX.utils.sheet_to_json(sheet);
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
 
-      setData(sheetData);
+      // Faz o cast para o tipo certo
+      const sheetData = XLSX.utils.sheet_to_json(sheet) as DadoDaPlanilha[];
+      onDataLoaded(sheetData);
     };
 
     reader.readAsArrayBuffer(file);
   };
 
-  return (
-    <div>
-      <input type="file" onChange={handleFileUpload} />
-      {data && (
-        <div>
-          <h2>Dados Importados:</h2>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
-    </div>
-  );
+  return <input type="file" onChange={handleFileUpload} />;
 }
 
 export default FileInput;

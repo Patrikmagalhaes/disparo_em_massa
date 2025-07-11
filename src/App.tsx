@@ -1,20 +1,18 @@
-import FileInput from "./FileInput"
-import VariableMessageEditor from "./VariableMessageEditor"
+import { useState } from "react";
+import FileInput from "./FileInput";
+import VariableMessageEditor, { type DadoDaPlanilha } from "./VariableMessageEditor";
 
 function App() {
- 
-  const planilha = [
-    { nome: 'João', email: 'joao@email.com', idade: 25 },
-    { nome: 'Maria', email: 'maria@email.com', idade: 30 }
-  ];
+  const [data, setData] = useState<DadoDaPlanilha[] | null>(null);
+
   return (
     <>
-     <h1>Hello World!</h1>
-     <FileInput/>
-     <h1>Mensagem</h1>
-     <VariableMessageEditor jsonData={planilha}/>
+      <h1>Hello World!</h1>
+      <FileInput onDataLoaded={setData} />
+      <h1>Mensagem</h1>
+      {data && <VariableMessageEditor jsonData={data} />}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
