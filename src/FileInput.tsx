@@ -23,6 +23,7 @@ function FileInput({ onDataLoaded }: Props) {
       // Faz o cast para o tipo certo
       const sheetData = XLSX.utils.sheet_to_json(sheet) as DadoDaPlanilha[];
       onDataLoaded(sheetData);
+      console.log(sheetData)
     };
 
     reader.readAsArrayBuffer(file);

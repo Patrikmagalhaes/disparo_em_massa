@@ -36,14 +36,7 @@ const VariableMessageEditor: React.FC<VariableMessageEditorProps> = ({ jsonData 
 
   return (
     <div style={{ fontFamily: 'sans-serif', maxWidth: '600px' }}>
-      <h3>Variáveis disponíveis:</h3>
-      <ul>
-        {columns.map((col) => (
-          <li key={col} style={{ color: 'green', fontWeight: 'bold' }}>
-            {col}
-          </li>
-        ))}
-      </ul>
+  
 
       <h3>Digite sua mensagem:</h3>
       <textarea
@@ -54,7 +47,14 @@ const VariableMessageEditor: React.FC<VariableMessageEditorProps> = ({ jsonData 
         placeholder="Ex: Olá {{nome}}, seu email é {{email}}"
         style={{ marginBottom: '20px' }}
       />
-
+    <h3>Colunas disponíveis:</h3>
+      <ul>
+        {columns.map((col) => (
+          <li key={col} style={{ color: 'green', fontWeight: 'bold' }}>
+            {col}
+          </li>
+        ))}
+      </ul>
       {usedVariables.length > 0 && (
         <>
           <h4>Validação de variáveis:</h4>

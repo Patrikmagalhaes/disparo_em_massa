@@ -7,9 +7,9 @@ function App() {
 
   return (
     <>
-      <h1>Hello World!</h1>
+     
       <FileInput onDataLoaded={setData} />
-      <h1>Mensagem</h1>
+
       {data && <VariableMessageEditor jsonData={data} />}
     </>
   );
